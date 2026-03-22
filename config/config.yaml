@@ -1,0 +1,108 @@
+# ============================================================
+# Tushare 量化回测框架 - 全局配置文件
+# ============================================================
+
+# ------------------- Tushare 配置 -------------------
+tushare:
+  # Tushare Pro API Token (从 https://tushare.pro 注册获取)
+  token: "<TBD>"
+  
+  # 数据缓存目录
+  cache_dir: "./data/cache"
+  
+  # 请求重试次数
+  retry_times: 3
+  
+  # 请求间隔(秒)，避免触发频率限制
+  retry_delay: 1.0
+
+# ------------------- 回测参数配置 -------------------
+backtest:
+  # 初始资金 (单位: 元)
+  initial_cash: 100000.0
+  
+  # 策略名称
+  strategy_name: "default_strategy"
+  
+  # 回测时间范围
+  start_date: "20200101"
+  end_date: "20231231"
+  
+  # 基准代码 (用于计算超额收益, 如 000300.SH = 沪深300)
+  benchmark: "000300.SH"
+  
+  # 交易手续费率 (默认万分之3)
+  commission_rate: 0.0003
+  
+  # 印花税率 (卖出时收取, 默认千分之一)
+  stamp_tax_rate: 0.001
+  
+  # 滑点 (按百分比, 默认0.001 = 0.1%)
+  slippage: 0.001
+  
+  # 股票最小交易量 (手)
+  min_volume: 100
+  
+  # 是否允许做空 (默认 False)
+  allow_short: false
+
+# ------------------- 策略参数配置 -------------------
+strategy:
+  # 均线周期
+  ma_short: 5
+  ma_long: 20
+  
+  # RSI 参数
+  rsi_period: 14
+  rsi_overbought: 70
+  rsi_oversold: 30
+  
+  # 止损止盈
+  stop_loss: 0.05      # 5% 止损
+  take_profit: 0.10    # 10% 止盈
+  
+  # 仓位管理
+  max_position: 0.3    # 单只股票最大仓位 (30%)
+  max_total_position: 1.0  # 总仓位上限 (100%)
+
+# ------------------- 数据获取配置 -------------------
+data:
+  # 数据源: tushare (当前支持)
+  source: "tushare"
+  
+  # 日线/分钟线
+  data_type: "daily"  # daily / 1min / 5min / 15min / 30min / 60min
+  
+  # 数据字段
+  fields:
+    - trade_date
+    - ts_code
+    - open
+    - high
+    - low
+    - close
+    - volume
+    - amount
+  
+  # 数据预处理
+  preprocess:
+    fill_missing: "ffill"  # 前向填充 / drop / ffill
+    remove_outliers: true
+    outlier_std: 5
+
+# ------------------- 输出配置 -------------------
+output:
+  # 结果保存目录
+  results_dir: "./output/results"
+  
+  # 可视化图表保存目录
+  plots_dir: "./output/plots"
+  
+  # 报告文件路径
+  report_path: "./output/backtest_report.html"
+  
+  # 是否保存中间数据
+  save_intermediate: true
+  
+  # 日志级别: DEBUG / INFO / WARNING / ERROR
+  log_level: "INFO"

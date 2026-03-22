@@ -1,0 +1,15 @@
+{
+  "strategy": "示例策略",
+  "initial_cash": 100000,
+  "final_cash": 114859.51865084984,
+  "total_return": 0.14859518650849846,
+  "annual_return": 0.19072208778253574,
+  "sharpe_ratio": 0.5398987599786255,
+  "max_drawdown": -0.11115411475301408,
+  "win_rate": 0.5025125628140703,
+  "volatility": 0.5866334311844973,
+  "var_95": 0.056786119653635336,
+  "trades": 10,
+  "winning_trades": 6,
+  "losing_trades": 4
+}
